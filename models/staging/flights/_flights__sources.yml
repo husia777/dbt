@@ -2,10 +2,21 @@ sources:
   - name: demo_src
     database: dwh_flight
     schema: demo_src
+    description: Данные из БД авиаперелетов
     tables:
       - name: aircrafts
+        description: Модели самолетов
+        columns:
+        - name: airports_code
+          description: Код модели самолета
+        - name: model
+          description: Название модели самолета
+        - name: "range"
+          description: Название модели самолета
       - name: aircrafts_data
+        description: Модели самолетов
       - name: airports
+        description: Модели аэропортов
       - name: airports_data
       - name: boarding_passes
       - name: bookings
@@ -15,3 +26,4 @@ sources:
       - name: seats
       - name: ticket_flights
       - name: tickets
+        description: Модели билетов
