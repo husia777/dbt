@@ -1,29 +1,40 @@
 sources:
-  - name: demo_src
-    database: dwh_flight
-    schema: demo_src
-    description: Данные из БД авиаперелетов
-    tables:
-      - name: aircrafts
-        description: Модели самолетов
-        columns:
-        - name: airports_code
-          description: Код модели самолета
-        - name: model
-          description: Название модели самолета
-        - name: "range"
-          description: Название модели самолета
-      - name: aircrafts_data
-        description: Модели самолетов
-      - name: airports
-        description: Модели аэропортов
-      - name: airports_data
-      - name: boarding_passes
-      - name: bookings
-      - name: flights
-      - name: flights_v
-      - name: routes
-      - name: seats
-      - name: ticket_flights
-      - name: tickets
-        description: Модели билетов
+- name: demo_src
+  description: Данные из БД авиаперелетов
+  tables:
+  - name: aircrafts
+    description: Модели самолетов
+    columns:
+    - name: airports_code
+      description: Код модели самолета
+    - name: model
+      description: Название модели самолета
+    - name: "range"
+      description: Название модели самолета
+  - name: aircrafts_data
+    description: Модели самолетов
+  - name: airports
+    description: Модели аэропортов
+  - name: airports_data
+  - name: boarding_passes
+  - name: bookings
+    columns:
+    - name: book_ref
+    - name: book_date
+    - name: total_amount
+    freshness:
+      error_after:
+        count: 10000
+        period: day
+      warn_after:
+        count: 6
+        period: hour
+      filter: current_timestamp::date - book_date::date < 3000
+    loaded_at_field: book_date::timestamp # поле которое определяет возраст
+  - name: flights
+  - name: flights_v
+  - name: routes
+  - name: seats
+  - name: ticket_flights
+  - name: tickets
+    description: Модели билетов
